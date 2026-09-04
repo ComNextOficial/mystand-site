@@ -4,7 +4,7 @@ window.MYSTAND = {
   PRICE_LABEL: "R$ 247",
   CHECKOUT_URL: "",
   PIXEL_ID: "1408623938032423",
-  SITE_URL: "https://comnextoficial.github.io/mystand",
+  SITE_URL: "https://comnextoficial.github.io/mystand-site",
   COMPANY_NAME: "Família ComNext",
   LEGAL_NAME: "",
   CNPJ: "",
