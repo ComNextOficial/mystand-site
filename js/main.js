@@ -100,14 +100,17 @@
         }
       });
       qs("a[data-legal-href='" + key + "']").forEach(function (el) {
+        var row = el.closest("[data-legal-row]");
         if (!val) {
-          if (!el.hasAttribute("data-keep-placeholder")) el.hidden = true;
+          el.hidden = true;
+          if (row) row.hidden = true;
           return;
         }
         if (key === "EMAIL") el.href = "mailto:" + val;
         if (key === "PHONE") el.href = "tel:" + val.replace(/\s/g, "");
         el.textContent = val;
         el.hidden = false;
+        if (row) row.hidden = false;
       });
     });
   }
@@ -125,18 +128,7 @@
         el.classList.remove("is-wait");
       } else {
         el.setAttribute("href", "#oferta");
-        el.classList.add("is-wait");
-        el.addEventListener("click", function (ev) {
-          if (!checkout) {
-            ev.preventDefault();
-            var note = document.getElementById("checkout-note");
-            if (note) {
-              note.hidden = false;
-              note.focus();
-              note.scrollIntoView({ behavior: "smooth", block: "center" });
-            }
-          }
-        });
+        el.classList.remove("is-wait");
       }
     });
   }

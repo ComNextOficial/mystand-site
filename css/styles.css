@@ -85,6 +85,7 @@ body {
   letter-spacing: -0.011em;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+  overflow-wrap: break-word;
 }
 
 body.nav-open {
@@ -707,9 +708,17 @@ main,
   padding: 0 0.95rem 0.95rem;
   font-size: 0.76rem;
   line-height: 1.55;
-  overflow: auto;
+  overflow: visible;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
   color: #d7e7c8;
   font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+}
+
+.code-card code {
+  font: inherit;
+  color: inherit;
 }
 
 .code-split {
@@ -789,7 +798,7 @@ main,
 /* ---------- tabela ---------- */
 
 .table-wrap {
-  overflow: auto;
+  overflow: visible;
 }
 
 .stack-table {
@@ -1071,13 +1080,206 @@ main,
   }
 }
 
-.note {
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
-  padding: 0.85rem 1rem;
-  background: #fff7c2;
-  border-radius: 0.9rem;
-  color: var(--ink);
+@media (max-width: 759px) {
+  body {
+    font-size: 0.95rem;
+  }
+
+  .hero-copy,
+  .section-head,
+  .letter,
+  .price-card,
+  .faq,
+  .no {
+    text-align: center;
+  }
+
+  .hero-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: none;
+  }
+
+  .hero h1,
+  .hero-sub,
+  .lede,
+  .section-head,
+  .letter,
+  .price-card {
+    max-width: none;
+    width: 100%;
+  }
+
+  .lockup {
+    justify-content: center;
+    text-align: left;
+  }
+
+  .kicker {
+    justify-content: center;
+  }
+
+  .hero-shout {
+    border-left: 0;
+    padding-left: 0;
+    display: inline-block;
+    border-bottom: 2px solid var(--lime);
+    padding-bottom: 0.28rem;
+  }
+
+  .lede {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: min(100%, 20.5rem);
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+
+  .btn-xl {
+    min-height: 2.85rem;
+    padding: 0.7rem 1.1rem;
+    font-size: 0.92rem;
+  }
+
+  .hero-meta {
+    justify-content: center;
+    gap: 0.32rem;
+    max-width: 18rem;
+  }
+
+  .chip {
+    min-height: 1.25rem;
+    padding: 0.08rem 0.45rem;
+    font-size: 0.58rem;
+    letter-spacing: 0.02em;
+    font-weight: 600;
+  }
+
+  .nowrap {
+    white-space: normal;
+  }
+
+  .section-head p {
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+
+  .code-grid {
+    width: min(100%, 22rem);
+    margin-inline: auto;
+    gap: 0.45rem;
+  }
+
+  .code-card {
+    border-radius: 0.65rem;
+    box-shadow: none;
+  }
+
+  .code-card header {
+    padding: 0.35rem 0.6rem 0.15rem;
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+  }
+
+  .code-card pre {
+    padding: 0.15rem 0.6rem 0.5rem;
+    font-size: 0.6rem;
+    line-height: 1.4;
+  }
+
+  .claims {
+    text-align: left;
+    max-width: 22rem;
+    margin-inline: auto;
+  }
+
+  .table-wrap {
+    overflow: visible;
+  }
+
+  .stack-table {
+    display: block;
+    box-shadow: 0 8px 24px rgba(11, 22, 16, 0.06);
+  }
+
+  .stack-table thead {
+    display: none;
+  }
+
+  .stack-table tbody {
+    display: block;
+  }
+
+  .stack-table tr {
+    display: grid;
+    gap: 0.2rem;
+    padding: 0.7rem 0.85rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .stack-table td {
+    display: block;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 0.78rem;
+    line-height: 1.4;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .stack-table td:last-child {
+    white-space: normal;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+  }
+
+  .stack-table .stack-total td {
+    padding: 0.75rem 0.7rem;
+  }
+
+  .stack-total-inner {
+    align-items: center;
+    text-align: center;
+    gap: 0.3rem;
+  }
+
+  .stack-total-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    line-height: 1.35;
+  }
+
+  .stack-total-value {
+    font-size: 1rem;
+  }
+
+  .price-card .btn-lime {
+    max-width: none;
+    font-size: 0.95rem;
+  }
+
+  .checklist {
+    text-align: left;
+  }
+
+  .letter {
+    font-size: 0.92rem;
+  }
+
+  .letter p {
+    font-size: 0.92rem;
+  }
 }
 
 /* ---------- rodapé ---------- */

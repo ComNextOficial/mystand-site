@@ -71,7 +71,7 @@
           <div class="hero-meta">
             <span class="chip">Licença irrestrita</span>
             <span class="chip chip-muted">Acesso vitalício</span>
-            <span class="chip chip-muted">Versão nova a cada 15–30 dias</span>
+            <span class="chip chip-muted">Atualização 15–30 dias</span>
           </div>
         </div>
 
@@ -201,24 +201,16 @@
       <div class="code-grid" data-reveal>
         <article class="code-card">
           <header><span>Cursor</span><span>JSON</span></header>
-          <pre>{
-  "mcpServers": {
-    "mystand": {
-      "url": "http://127.0.0.1:4319/..."
-    }
-  }
-}</pre>
+          <pre><code>{"mcpServers":{"mystand":{"url":"http://127.0.0.1:4319/..."}}}</code></pre>
         </article>
         <article class="code-card">
           <header><span>Claude Code</span><span>CLI</span></header>
-          <pre>claude mcp add mystand \
-  --transport http \
-  http://127.0.0.1:4319/...</pre>
+          <pre><code>claude mcp add mystand --transport http http://127.0.0.1:4319/...</code></pre>
         </article>
         <article class="code-card">
           <header><span>Codex</span><span>TOML</span></header>
-          <pre>[mcp_servers.mystand]
-url = "http://127.0.0.1:4319/..."</pre>
+          <pre><code>[mcp_servers.mystand]
+url = "http://127.0.0.1:4319/..."</code></pre>
         </article>
       </div>
 
@@ -299,7 +291,7 @@ url = "http://127.0.0.1:4319/..."</pre>
             <tr class="stack-total">
               <td colspan="2">
                 <div class="stack-total-inner">
-                  <span class="stack-total-label">My Stand nesta abertura — fonte completo, licença irrestrita e atualizações vitalícias</span>
+                  <span class="stack-total-label">My Stand nesta abertura — fonte, licença e atualizações</span>
                   <span class="stack-total-value">Uma fração disso</span>
                 </div>
               </td>
@@ -363,7 +355,6 @@ url = "http://127.0.0.1:4319/..."</pre>
         <div class="hero-actions">
           <a class="btn btn-lime btn-xl" data-checkout href="#oferta">Quero o código-fonte agora</a>
         </div>
-        <p class="note" id="checkout-note" hidden tabindex="-1">O checkout desta leva ainda está sendo ligado. Coloque a URL de pagamento em js/config.js (CHECKOUT_URL). Na plataforma, a URL de sucesso deve ser obrigado.html — é ela que dispara a compra no Pixel.</p>
       </div>
     </section>
   </main>
