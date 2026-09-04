@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://comnextoficial.github.io/mystand-site/sitemap.xml
+Sitemap: https://mystand.site/sitemap.xml
