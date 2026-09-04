@@ -122,10 +122,13 @@
 
     qs("[data-checkout]").forEach(function (el) {
       if (checkout) {
-        el.setAttribute("href", pagarHref());
+        el.setAttribute("href", checkout);
+        el.setAttribute("rel", "noopener noreferrer");
         el.removeAttribute("target");
-        el.removeAttribute("rel");
         el.classList.remove("is-wait");
+        el.addEventListener("click", function () {
+          track("InitiateCheckout", offerPayload());
+        });
       } else {
         el.setAttribute("href", "#oferta");
         el.classList.remove("is-wait");
