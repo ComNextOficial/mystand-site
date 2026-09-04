@@ -2,7 +2,7 @@
 window.MYSTAND = {
   PRICE: 247,
   PRICE_LABEL: "R$ 247",
-  CHECKOUT_URL: "",
+  CHECKOUT_URL: "https://pay.kiwify.com.br/O1q91jT",
   PIXEL_ID: "1408623938032423",
   SITE_URL: "https://mystand.site",
   COMPANY_NAME: "Família ComNext",
