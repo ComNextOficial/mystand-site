@@ -1,0 +1,234 @@
+(function () {
+  var cfg = window.MYSTAND || {};
+  var price = cfg.PRICE_LABEL || "R$ 247";
+  var checkout = (cfg.CHECKOUT_URL || "").trim();
+  var company = cfg.COMPANY_NAME || "Família ComNext";
+
+  function qs(sel, root) {
+    return (root || document).querySelectorAll(sel);
+  }
+
+  function ready(fn) {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", fn);
+    } else {
+      fn();
+    }
+  }
+
+  function eventId(name) {
+    try {
+      if (window.crypto && crypto.randomUUID) return name + "_" + crypto.randomUUID();
+    } catch (e) {}
+    return name + "_" + Date.now() + "_" + Math.random().toString(36).slice(2, 10);
+  }
+
+  function track(event, extra) {
+    try {
+      if (typeof window.fbq === "function") {
+        window.fbq("track", event, extra || {}, { eventID: eventId(event) });
+      }
+    } catch (e) {}
+  }
+
+  function pageKind() {
+    var p = (location.pathname || "").toLowerCase();
+    if (/contato\.html/.test(p)) return "contato";
+    if (/ir-pagar\.html/.test(p)) return "pagar";
+    if (/obrigado\.html/.test(p)) return "obrigado";
+    if (/index\.html$/.test(p) || /\/$/.test(location.pathname) || location.pathname === "") return "landing";
+    return "other";
+  }
+
+  function pagarHref() {
+    return /\/legal\//.test(location.pathname) ? "../ir-pagar.html" : "ir-pagar.html";
+  }
+
+  function offerPayload() {
+    return {
+      content_name: "My Stand codigo-fonte",
+      content_ids: ["mystand-fonte"],
+      content_type: "product",
+      value: cfg.PRICE || 247,
+      currency: "BRL"
+    };
+  }
+
+  function injectPixel(id) {
+    if (!id || window.fbq) return;
+    var n = function () {
+      n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+    };
+    window.fbq = n;
+    if (!window._fbq) window._fbq = n;
+    n.push = n;
+    n.loaded = true;
+    n.version = "2.0";
+    n.queue = [];
+    var s = document.createElement("script");
+    s.async = true;
+    s.src = "https://connect.facebook.net/en_US/fbevents.js";
+    var first = document.getElementsByTagName("script")[0];
+    first.parentNode.insertBefore(s, first);
+    n("init", id);
+    n("track", "PageView");
+  }
+
+  function fillLegal() {
+    qs("[data-company]").forEach(function (el) {
+      el.textContent = company;
+    });
+    var map = {
+      LEGAL_NAME: cfg.LEGAL_NAME,
+      CNPJ: cfg.CNPJ,
+      ADDRESS: cfg.ADDRESS,
+      EMAIL: cfg.EMAIL,
+      PHONE: cfg.PHONE
+    };
+    Object.keys(map).forEach(function (key) {
+      var val = (map[key] || "").trim();
+      qs("[data-legal='" + key + "']").forEach(function (el) {
+        if (val) {
+          el.textContent = val;
+          el.hidden = false;
+          if (el.parentElement && el.parentElement.hasAttribute("data-legal-row")) {
+            el.parentElement.hidden = false;
+          }
+        } else {
+          var row = el.closest("[data-legal-row]");
+          if (row) row.hidden = true;
+        }
+      });
+      qs("a[data-legal-href='" + key + "']").forEach(function (el) {
+        if (!val) {
+          if (!el.hasAttribute("data-keep-placeholder")) el.hidden = true;
+          return;
+        }
+        if (key === "EMAIL") el.href = "mailto:" + val;
+        if (key === "PHONE") el.href = "tel:" + val.replace(/\s/g, "");
+        el.textContent = val;
+        el.hidden = false;
+      });
+    });
+  }
+
+  function wireCtas() {
+    qs("[data-price]").forEach(function (el) {
+      el.textContent = price;
+    });
+
+    qs("[data-checkout]").forEach(function (el) {
+      if (checkout) {
+        el.setAttribute("href", pagarHref());
+        el.removeAttribute("target");
+        el.removeAttribute("rel");
+        el.classList.remove("is-wait");
+      } else {
+        el.setAttribute("href", "#oferta");
+        el.classList.add("is-wait");
+        el.addEventListener("click", function (ev) {
+          if (!checkout) {
+            ev.preventDefault();
+            var note = document.getElementById("checkout-note");
+            if (note) {
+              note.hidden = false;
+              note.focus();
+              note.scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+          }
+        });
+      }
+    });
+  }
+
+  function nav() {
+    var header = document.querySelector(".site-header");
+    var toggle = document.querySelector(".nav-toggle");
+    var panel = document.querySelector(".nav-panel");
+    if (toggle && panel) {
+      toggle.addEventListener("click", function () {
+        var open = panel.classList.toggle("is-open");
+        toggle.setAttribute("aria-expanded", open ? "true" : "false");
+        document.body.classList.toggle("nav-open", open);
+      });
+      panel.querySelectorAll("a").forEach(function (a) {
+        a.addEventListener("click", function () {
+          panel.classList.remove("is-open");
+          toggle.setAttribute("aria-expanded", "false");
+          document.body.classList.remove("nav-open");
+        });
+      });
+    }
+    var onScroll = function () {
+      if (header) header.classList.toggle("is-scrolled", window.scrollY > 8);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
+
+  function reveal() {
+    var nodes = qs("[data-reveal]");
+    if (!nodes.length) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      nodes.forEach(function (el) {
+        el.classList.add("is-in");
+      });
+      return;
+    }
+    if (!("IntersectionObserver" in window)) {
+      nodes.forEach(function (el) {
+        el.classList.add("is-in");
+      });
+      return;
+    }
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-in");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.12 }
+    );
+    nodes.forEach(function (el) {
+      io.observe(el);
+    });
+  }
+
+  function funnelPages() {
+    var kind = pageKind();
+    if (kind === "landing") {
+      track("ViewContent", offerPayload());
+      return;
+    }
+    if (kind === "contato") {
+      track("Lead", { content_name: "Contato My Stand" });
+      return;
+    }
+    if (kind === "pagar") {
+      if (checkout) {
+        track("InitiateCheckout", offerPayload());
+        window.setTimeout(function () {
+          location.replace(checkout);
+        }, 450);
+      } else {
+        location.replace("index.html#oferta");
+      }
+      return;
+    }
+    if (kind === "obrigado") {
+      track("Purchase", offerPayload());
+    }
+  }
+
+  ready(function () {
+    if (cfg.PIXEL_ID) injectPixel(cfg.PIXEL_ID);
+    fillLegal();
+    wireCtas();
+    nav();
+    reveal();
+    funnelPages();
+  });
+})();
