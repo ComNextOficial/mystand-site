@@ -18,6 +18,22 @@
     }
   }
 
+  function withTrackingParams(url) {
+    if (!url) return url;
+    var search = (location.search || "").replace(/^\?/, "");
+    if (!search) return url;
+    try {
+      var next = new URL(url, location.href);
+      var incoming = new URLSearchParams(location.search);
+      incoming.forEach(function (value, key) {
+        if (value) next.searchParams.set(key, value);
+      });
+      return next.toString();
+    } catch (e) {
+      return url + (url.indexOf("?") >= 0 ? "&" : "?") + search;
+    }
+  }
+
   function eventId(name) {
     try {
       if (window.crypto && crypto.randomUUID) return name + "_" + crypto.randomUUID();
@@ -143,7 +159,7 @@
 
     function wirePay(el, url) {
       if (url) {
-        el.setAttribute("href", url);
+        el.setAttribute("href", withTrackingParams(url));
         el.setAttribute("rel", "noopener noreferrer");
         el.removeAttribute("target");
         el.classList.remove("is-wait");
@@ -408,7 +424,7 @@
       if (checkout) {
         track("InitiateCheckout", offerPayload());
         window.setTimeout(function () {
-          location.replace(checkout);
+          location.replace(withTrackingParams(checkout));
         }, 450);
       } else {
         location.replace("index.html#oferta");
