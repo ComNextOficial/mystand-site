@@ -1,6 +1,7 @@
 /* Landing independente em mystand.site/video */
 window.MYSTAND = {
   PRICE: 247,
+  PRICE_ALT: 187,
   PRICE_LABEL: "R$ 247",
   PRICE_INSTALLMENTS: "até 12x de R$ 25,55",
   CHECKOUT_URL: "https://pay.kiwify.com.br/oJ5pcI8",
