@@ -1,4 +1,4 @@
-/* Landing independente em mystand.site/kdp */
+/* Landing independente em mystand.site/video */
 window.MYSTAND = {
   PRICE: 247,
   PRICE_LABEL: "R$ 247",
@@ -7,7 +7,7 @@ window.MYSTAND = {
   CHECKOUT_ALT_URL: "https://pay.kiwify.com.br/OI8UR6A",
   PIXEL_ID: "1408623938032423",
   PIXEL_IDS: ["1408623938032423", "1794380701994286"],
-  SITE_URL: "https://mystand.site/kdp",
+  SITE_URL: "https://mystand.site/video",
   COMPANY_NAME: "Família ComNext",
   LEGAL_NAME: "",
   CNPJ: "",

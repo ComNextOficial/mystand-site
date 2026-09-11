@@ -1020,6 +1020,59 @@ main,
   color: var(--muted);
 }
 
+.price-install {
+  margin-top: 0.45rem;
+  font-size: 1.02rem;
+  color: var(--ink-soft);
+}
+
+.price-install strong {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 560;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.offer-ghost {
+  position: absolute;
+  right: -0.35rem;
+  bottom: 1.05rem;
+  margin: 0;
+  z-index: 2;
+}
+
+.offer-ghost-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.1rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 0.35rem;
+  background: #e4e6dc;
+  color: #4e564e;
+  border: 1px dashed rgba(11, 22, 16, 0.35);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  transform: rotate(-15deg) translate(0.35rem, 0.2rem);
+  opacity: 0.62;
+  box-shadow: 4px 5px 0 rgba(11, 22, 16, 0.05);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.offer-ghost-btn:hover {
+  opacity: 0.9;
+  transform: rotate(-10deg) translate(0.85rem, 0.45rem);
+}
+
+.offer {
+  position: relative;
+  padding-bottom: 5.2rem;
+  overflow: visible;
+}
+
 .checklist {
   margin: 1.2rem 0 0;
   padding: 0;
@@ -1274,6 +1327,17 @@ main,
 
   .checklist {
     text-align: left;
+  }
+
+  .offer-ghost {
+    right: auto;
+    left: 0.35rem;
+    bottom: 0.7rem;
+  }
+
+  .offer-ghost-btn {
+    transform: rotate(-12deg) translate(-0.1rem, 0.15rem);
+    font-size: 0.64rem;
   }
 
   .letter {
@@ -2040,7 +2104,8 @@ main,
 
   .btn,
   .tilt img,
-  [data-reveal] {
+  [data-reveal],
+  .offer-ghost-btn {
     transition: none;
   }
 

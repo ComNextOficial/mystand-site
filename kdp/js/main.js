@@ -2,6 +2,8 @@
   var cfg = window.MYSTAND || {};
   var price = cfg.PRICE_LABEL || "R$ 247";
   var checkout = (cfg.CHECKOUT_URL || "").trim();
+  var checkoutAlt = (cfg.CHECKOUT_ALT_URL || "").trim();
+  var installments = cfg.PRICE_INSTALLMENTS || "";
   var company = cfg.COMPANY_NAME || "Família ComNext";
 
   function qs(sel, root) {
@@ -36,7 +38,7 @@
     if (/contato\.html/.test(p)) return "contato";
     if (/ir-pagar\.html/.test(p)) return "pagar";
     if (/obrigado\.html/.test(p)) return "obrigado";
-    if (/index\.html$/.test(p) || /\/kdp\/?$/.test(p) || /\/$/.test(p) || p === "") return "landing";
+    if (/index\.html$/.test(p) || /\/$/.test(location.pathname) || location.pathname === "") return "landing";
     return "other";
   }
 
@@ -54,23 +56,39 @@
     };
   }
 
-  function injectPixel(id) {
-    if (!id || window.fbq) return;
-    var n = function () {
-      n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
-    };
-    window.fbq = n;
-    if (!window._fbq) window._fbq = n;
-    n.push = n;
-    n.loaded = true;
-    n.version = "2.0";
-    n.queue = [];
-    var s = document.createElement("script");
-    s.async = true;
-    s.src = "https://connect.facebook.net/en_US/fbevents.js";
-    var first = document.getElementsByTagName("script")[0];
-    first.parentNode.insertBefore(s, first);
-    n("init", id);
+  function pixelList() {
+    var ids = [];
+    function add(id) {
+      id = String(id || "").trim();
+      if (id && ids.indexOf(id) === -1) ids.push(id);
+    }
+    if (Array.isArray(cfg.PIXEL_IDS)) cfg.PIXEL_IDS.forEach(add);
+    add(cfg.PIXEL_ID);
+    return ids;
+  }
+
+  function injectPixels(ids) {
+    if (!ids.length) return;
+    var n = window.fbq;
+    if (typeof n !== "function") {
+      n = function () {
+        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+      };
+      window.fbq = n;
+      if (!window._fbq) window._fbq = n;
+      n.push = n;
+      n.loaded = true;
+      n.version = "2.0";
+      n.queue = [];
+      var s = document.createElement("script");
+      s.async = true;
+      s.src = "https://connect.facebook.net/en_US/fbevents.js";
+      var first = document.getElementsByTagName("script")[0];
+      first.parentNode.insertBefore(s, first);
+    }
+    ids.forEach(function (id) {
+      n("init", id);
+    });
     n("track", "PageView");
   }
 
@@ -119,10 +137,13 @@
     qs("[data-price]").forEach(function (el) {
       el.textContent = price;
     });
+    qs("[data-installments]").forEach(function (el) {
+      if (installments) el.textContent = installments;
+    });
 
-    qs("[data-checkout]").forEach(function (el) {
-      if (checkout) {
-        el.setAttribute("href", checkout);
+    function wirePay(el, url) {
+      if (url) {
+        el.setAttribute("href", url);
         el.setAttribute("rel", "noopener noreferrer");
         el.removeAttribute("target");
         el.classList.remove("is-wait");
@@ -133,6 +154,13 @@
         el.setAttribute("href", "#oferta");
         el.classList.remove("is-wait");
       }
+    }
+
+    qs("[data-checkout]").forEach(function (el) {
+      wirePay(el, checkout);
+    });
+    qs("[data-checkout-alt]").forEach(function (el) {
+      wirePay(el, checkoutAlt);
     });
   }
 
@@ -393,7 +421,7 @@
   }
 
   ready(function () {
-    if (cfg.PIXEL_ID) injectPixel(cfg.PIXEL_ID);
+    injectPixels(pixelList());
     fillLegal();
     wireCtas();
     nav();
