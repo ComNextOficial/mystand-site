@@ -1049,40 +1049,62 @@ main,
 
 .offer-ghost {
   position: absolute;
-  right: -0.35rem;
-  bottom: 1.05rem;
+  left: -0.15rem;
+  bottom: 0.2rem;
   margin: 0;
-  z-index: 2;
+  z-index: 3;
+  width: auto;
+  max-width: none;
+  transform: none;
 }
 
 .offer-ghost-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 2.1rem;
-  padding: 0.35rem 0.85rem;
-  border-radius: 0.35rem;
-  background: #e4e6dc;
-  color: #4e564e;
-  border: 1px dashed rgba(11, 22, 16, 0.35);
-  font-size: 0.72rem;
+  width: auto;
+  min-width: 15.5rem;
+  min-height: 2.85rem;
+  height: auto;
+  margin: 0;
+  padding: 0.7rem 1.15rem;
+  border-radius: 999px;
+  background: #2f6d22;
+  color: #fff;
+  border: 1px solid #1c4a16;
+  box-shadow: none;
+  font-size: 0.92rem;
   font-weight: 600;
-  letter-spacing: 0.01em;
-  text-decoration: none;
-  transform: rotate(-15deg) translate(0.35rem, 0.2rem);
-  opacity: 0.62;
-  box-shadow: 4px 5px 0 rgba(11, 22, 16, 0.05);
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .offer-ghost-btn:hover {
-  opacity: 0.9;
-  transform: rotate(-10deg) translate(0.85rem, 0.45rem);
+  background: #265a1c;
+  color: #fff;
+  transform: none;
+}
+
+.offer-ghost-note {
+  display: block;
+  width: auto;
+  margin: 0.4rem 0 0 0.2rem;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: #5a5a5a;
+  white-space: normal;
+  transform: none;
 }
 
 .offer {
   position: relative;
-  padding-bottom: 5.2rem;
+  padding-bottom: 7.4rem;
   overflow: visible;
 }
 
@@ -1352,14 +1374,22 @@ main,
   }
 
   .offer-ghost {
-    right: auto;
-    left: 0.35rem;
-    bottom: 0.7rem;
+    left: 0.1rem;
+    bottom: 0.1rem;
+    width: calc(100% - 0.8rem);
   }
 
   .offer-ghost-btn {
-    transform: rotate(-12deg) translate(-0.1rem, 0.15rem);
-    font-size: 0.64rem;
+    min-width: 0;
+    width: 100%;
+    max-width: 17rem;
+    font-size: 0.86rem;
+    padding: 0.65rem 1rem;
+    white-space: normal;
+  }
+
+  .offer-ghost-note {
+    font-size: 0.72rem;
   }
 
   .letter {
@@ -1462,7 +1492,7 @@ main,
 
 .studio-card {
   position: relative;
-  flex: 0 0 min(38rem, calc(100vw - 2.7rem));
+  flex: 0 0 min(24.5rem, calc(100vw - 2.7rem));
   scroll-snap-align: start;
   display: flex;
   flex-direction: column;
@@ -1498,7 +1528,8 @@ main,
 
 .studio-visual {
   position: relative;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 8;
+  max-height: 10.2rem;
   overflow: hidden;
   background:
     linear-gradient(110deg, #e8ece3 20%, #f7f8f3 38%, #e8ece3 56%);
@@ -1555,8 +1586,8 @@ main,
 .studio-body {
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
-  padding: 1.05rem 1.15rem 1.25rem;
+  gap: 0.32rem;
+  padding: 0.82rem 1rem 0.95rem;
   flex: 1;
 }
 
@@ -1570,7 +1601,7 @@ main,
 
 .studio-card h3 {
   font-family: var(--serif);
-  font-size: clamp(1.28rem, 3.4vw, 1.72rem);
+  font-size: clamp(1.1rem, 3vw, 1.36rem);
   font-weight: 560;
   letter-spacing: -0.03em;
   line-height: 1.08;
@@ -1578,8 +1609,8 @@ main,
 
 .studio-lead {
   color: var(--ink-soft);
-  font-size: 0.95rem;
-  line-height: 1.5;
+  font-size: 0.9rem;
+  line-height: 1.4;
 }
 
 .studio-points {
@@ -1937,6 +1968,10 @@ main,
 }
 
 @media (max-width: 759px) {
+  .studio-visual {
+    max-height: 8.6rem;
+  }
+
   .studio-card {
     flex-basis: calc(100vw - 2.4rem);
   }

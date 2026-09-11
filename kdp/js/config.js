@@ -2,7 +2,7 @@
 window.MYSTAND = {
   PRICE: 247,
   PRICE_LABEL: "R$ 247",
-  PRICE_INSTALLMENTS: "até 12x de R$ 20,58",
+  PRICE_INSTALLMENTS: "até 12x de R$ 25,55",
   CHECKOUT_URL: "https://pay.kiwify.com.br/oJ5pcI8",
   CHECKOUT_ALT_URL: "https://pay.kiwify.com.br/OI8UR6A",
   PIXEL_ID: "1408623938032423",
