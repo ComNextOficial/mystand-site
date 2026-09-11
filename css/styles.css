@@ -1470,7 +1470,7 @@ main,
 
 .studio-card {
   position: relative;
-  flex: 0 0 min(24.5rem, calc(100vw - 2.7rem));
+  flex: 0 0 min(28rem, calc(100vw - 2.7rem));
   scroll-snap-align: start;
   display: flex;
   flex-direction: column;
@@ -1507,7 +1507,7 @@ main,
 .studio-visual {
   position: relative;
   aspect-ratio: 16 / 8;
-  max-height: 10.2rem;
+  max-height: 11.4rem;
   overflow: hidden;
   background:
     linear-gradient(110deg, #e8ece3 20%, #f7f8f3 38%, #e8ece3 56%);
@@ -1721,6 +1721,59 @@ main,
   color: var(--muted);
 }
 
+.factory-section {
+  padding: 0 0 2.6rem;
+}
+
+.factory-card {
+  background: var(--paper);
+  border-radius: 1.45rem;
+  padding: 1.3rem 1.35rem 1.4rem;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(11, 22, 16, 0.06);
+}
+
+.factory-card h3 {
+  font-family: var(--serif);
+  font-size: clamp(1.35rem, 3.4vw, 1.85rem);
+  font-weight: 560;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  margin-top: 0.15rem;
+}
+
+.factory-card .studio-lead {
+  margin-top: 0.5rem;
+  max-width: 44rem;
+}
+
+.factory-steps {
+  list-style: none;
+  margin: 1.05rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.factory-steps li {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.22rem 0.72rem;
+  border-radius: 999px;
+  background: rgba(11, 22, 16, 0.06);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.factory-steps li:last-child {
+  background: var(--lime);
+  color: var(--ink);
+}
+
 .studio-scene {
   position: absolute;
   inset: 0;
@@ -1789,6 +1842,21 @@ main,
   background: #fff;
   color: var(--ink-soft);
   box-shadow: 0 1px 0 var(--line);
+}
+
+.scene-url {
+  background: #fff;
+  border-radius: 0.7rem;
+  padding: 0.42rem 0.75rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  box-shadow: 0 1px 0 var(--line);
+}
+
+.scene-domain .scene-stage {
+  gap: 0.38rem;
 }
 
 .scene-board {
@@ -1948,7 +2016,7 @@ main,
 @media (max-width: 759px) {
   .studio-visual {
     aspect-ratio: 16 / 8;
-    max-height: 8.6rem;
+    max-height: 10rem;
   }
 
   .studio-card {
