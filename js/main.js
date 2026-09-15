@@ -1,9 +1,11 @@
 (function () {
   var cfg = window.MYSTAND || {};
-  var price = cfg.PRICE_LABEL || "R$ 247";
+  var price = cfg.PRICE_LABEL || "R$ 147";
   var checkout = (cfg.CHECKOUT_URL || "").trim();
   var checkoutAlt = (cfg.CHECKOUT_ALT_URL || "").trim();
   var installments = cfg.PRICE_INSTALLMENTS || "";
+  var installmentCount = cfg.PRICE_INSTALLMENT_COUNT || "";
+  var installmentAmount = cfg.PRICE_INSTALLMENT_AMOUNT || "";
   var company = cfg.COMPANY_NAME || "Família ComNext";
 
   function qs(sel, root) {
@@ -62,7 +64,7 @@
     return /\/legal\//.test(location.pathname) ? "../ir-pagar.html" : "ir-pagar.html";
   }
 
-  var PRICE_MAIN = Number(cfg.PRICE) || 247;
+  var PRICE_MAIN = Number(cfg.PRICE) || 147;
   var PRICE_ALT = Number(cfg.PRICE_ALT) || 187;
   var ALLOWED_PRICES = {};
   ALLOWED_PRICES[PRICE_MAIN] = PRICE_MAIN;
@@ -195,6 +197,12 @@
     });
     qs("[data-installments]").forEach(function (el) {
       if (installments) el.textContent = installments;
+    });
+    qs("[data-installment-count]").forEach(function (el) {
+      if (installmentCount) el.textContent = installmentCount;
+    });
+    qs("[data-installment-amount]").forEach(function (el) {
+      if (installmentAmount) el.textContent = installmentAmount;
     });
 
     function wirePay(el, url) {

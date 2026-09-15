@@ -1,6 +1,23 @@
+# Documentação e checklists internos (não vão para o site)
 BRIEFING.md
 CAMPANHA.md
-.htaccess
+CHECKLIST-PAGINA.html
+
+# Ferramentas locais de dev / git
+scripts/
+.git-commit-msg.sh
+
+# Segredos e config local
+.env
+.env.*
+*.local
+
+# SO, editor, cache
 .DS_Store
 Thumbs.db
-.git-commit-msg.sh
+.cursor/
+.vscode/
+
+# Temporários e logs
+*.tmp
+*.log

@@ -515,6 +515,12 @@ main,
   color: var(--ink-soft);
 }
 
+.faq-aside {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-top: 0.45rem;
+}
+
 /* ---------- timeline problema/solução ---------- */
 
 .flow {
@@ -606,6 +612,35 @@ main,
 
 .flow > li.is-dark ul li::before {
   background: var(--lime);
+}
+
+.flow-body {
+  margin: 0.6rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.flow > li.is-dark .flow-body {
+  color: rgba(238, 243, 232, 0.85);
+}
+
+.recebe-lead {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  margin: 0 0 1.25rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.recebe-lead svg {
+  display: block;
+  opacity: 0.55;
 }
 
 /* ---------- trilho de funcionalidades ---------- */
@@ -801,59 +836,105 @@ main,
   overflow: visible;
 }
 
-.stack-table {
-  width: 100%;
-  border-collapse: collapse;
+.stack-intro {
+  max-width: 36rem;
+  margin: 0 0 1rem;
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+}
+
+.stack-board {
   background: var(--paper);
   border-radius: var(--radius);
-  overflow: hidden;
   box-shadow: var(--shadow);
+  padding: 1.2rem 1.25rem 1.15rem;
 }
 
-.stack-table th,
-.stack-table td {
-  text-align: left;
-  padding: 0.85rem 1rem;
-  border-bottom: 1px solid var(--line);
-  vertical-align: top;
-  font-size: 0.95rem;
+.stack-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
 }
 
-.stack-table td:last-child {
-  white-space: nowrap;
-  font-variant-numeric: tabular-nums;
-}
-
-.stack-table th {
-  font-size: 0.72rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  font-weight: 600;
-}
-
-.stack-table .stack-total td {
-  border-bottom: 0;
-  background: var(--lime);
-  font-weight: 600;
-  padding: 1rem 1.1rem;
-}
-
-.stack-total-inner {
+.stack-item {
   display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.stack-name {
+  font-weight: 600;
+  min-width: 0;
+}
+
+.stack-price {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--danger);
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: auto;
+  text-align: right;
+}
+
+.stack-totals {
+  margin-top: 1.15rem;
+  padding-top: 0.15rem;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.stack-total-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  font-weight: 600;
 }
 
 .stack-total-label {
-  line-height: 1.45;
+  font-weight: 600;
 }
 
-.stack-total-value {
+.stack-hint {
+  font-style: normal;
+  font-weight: 500;
+  color: var(--muted);
+  font-size: 0.88em;
+}
+
+.stack-pitch {
+  margin: 1.15rem 0 0;
+  padding: 0.95rem 1rem;
+  border-radius: 0.85rem;
+  background: rgba(11, 22, 16, 0.04);
   font-family: var(--serif);
-  font-size: 1.2rem;
+  font-size: clamp(1.02rem, 2.6vw, 1.22rem);
+  line-height: 1.35;
   letter-spacing: -0.02em;
-  line-height: 1.15;
+  text-align: center;
+}
+
+.stack-pitch strong {
+  font-weight: 620;
+}
+
+.stack-pitch .stack-pitch-burn {
+  color: var(--danger);
+}
+
+.stack-mystand {
+  margin: 1.1rem 0 0;
+  padding: 0.9rem 1rem;
+  background: var(--lime);
+  border-radius: 0.85rem;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  text-align: center;
 }
 
 .disclaimer {
@@ -889,20 +970,39 @@ main,
 
 /* ---------- faq ---------- */
 
+.faq-section {
+  padding-top: 0.5rem;
+}
+
+.faq-section .section-head {
+  margin-bottom: 0.85rem;
+}
+
+.faq-section .section-head h2 {
+  font-size: clamp(1.35rem, 4vw, 1.85rem);
+  margin-top: 0;
+}
+
+.faq {
+  max-width: 36rem;
+}
+
 .faq details {
   background: var(--paper);
-  border-radius: 1.1rem;
-  padding: 0.95rem 1.1rem;
+  border-radius: 0.75rem;
+  padding: 0.55rem 0.75rem;
   box-shadow: 0 1px 0 var(--line);
 }
 
 .faq details + details {
-  margin-top: 0.6rem;
+  margin-top: 0.4rem;
 }
 
 .faq summary {
   cursor: pointer;
   font-weight: 600;
+  font-size: 0.82rem;
+  line-height: 1.35;
   list-style: none;
 }
 
@@ -911,7 +1011,9 @@ main,
 }
 
 .faq details p {
-  margin-top: 0.65rem;
+  margin-top: 0.45rem;
+  font-size: 0.78rem;
+  line-height: 1.45;
   color: var(--ink-soft);
 }
 
@@ -971,19 +1073,65 @@ main,
 
 .price-title {
   font-family: var(--serif);
-  font-size: clamp(1.7rem, 5vw, 2.6rem);
+  font-size: clamp(1.45rem, 4.2vw, 2.1rem);
   font-weight: 560;
   letter-spacing: -0.035em;
   line-height: 1.03;
-  margin: 0.6rem 0 0.4rem;
+  margin: 0.6rem 0 0.35rem;
+}
+
+.price-lead {
+  margin: 0.5rem auto 0;
+  max-width: 22rem;
+  font-size: clamp(0.68rem, 2vw, 0.8rem);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--ink-soft);
 }
 
 .price-line {
-  display: flex;
-  flex-wrap: wrap;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.price-installments {
+  display: inline-flex;
   align-items: baseline;
-  gap: 0.5rem 0.9rem;
-  margin-top: 0.6rem;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  gap: 0.28em 0.38em;
+  max-width: 100%;
+}
+
+.price-count {
+  font-family: var(--serif);
+  font-size: clamp(1rem, 3.2vw, 1.45rem);
+  font-weight: 560;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--ink-soft);
+}
+
+.price-installments-de {
+  font-size: clamp(0.78rem, 2.2vw, 0.92rem);
+  font-weight: 500;
+  color: var(--muted);
+  line-height: 1;
+}
+
+.price-amount {
+  font-family: var(--serif);
+  font-size: clamp(1.85rem, 7.5vw, 2.85rem);
+  font-weight: 620;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  font-variant-numeric: tabular-nums;
+}
+
+.price-card.is-in .price-amount {
+  animation: forge 0.75s 0.12s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .price {
@@ -1013,11 +1161,26 @@ main,
 }
 
 .price-note {
+  margin-top: 0.15rem;
   font-size: 0.74rem;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--muted);
+}
+
+.price-full {
+  margin-top: 0.65rem;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+.price-full strong {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 560;
+  letter-spacing: -0.03em;
+  color: var(--ink);
 }
 
 .price-install {
@@ -1130,8 +1293,23 @@ main,
   background: var(--lime);
 }
 
+.price-platform-note {
+  margin: 1.35rem auto 0;
+  max-width: 24rem;
+  font-size: 0.62rem;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: var(--muted);
+}
+
+.price-platform-note strong {
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
 .price-card .hero-actions {
-  margin-top: 1.6rem;
+  margin-top: 0.55rem;
 }
 
 .price-card .btn-lime {
@@ -1279,67 +1457,20 @@ main,
     margin-inline: auto;
   }
 
-  .table-wrap {
-    overflow: visible;
+  .stack-board {
+    padding: 1rem 1rem 0.95rem;
   }
 
-  .stack-table {
-    display: block;
-    box-shadow: 0 8px 24px rgba(11, 22, 16, 0.06);
+  .stack-price {
+    font-size: 0.85rem;
   }
 
-  .stack-table thead {
-    display: none;
+  .stack-total-row {
+    flex-wrap: wrap;
   }
 
-  .stack-table tbody {
-    display: block;
-  }
-
-  .stack-table tr {
-    display: grid;
-    gap: 0.2rem;
-    padding: 0.7rem 0.85rem;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .stack-table td {
-    display: block;
-    padding: 0;
-    width: 100%;
-    text-align: center;
-    font-size: 0.78rem;
-    line-height: 1.4;
-    white-space: normal;
-    overflow-wrap: anywhere;
-    word-break: break-word;
-  }
-
-  .stack-table td:last-child {
-    white-space: normal;
-    font-size: 0.72rem;
-    font-weight: 600;
-    color: var(--ink-soft);
-  }
-
-  .stack-table .stack-total td {
-    padding: 0.75rem 0.7rem;
-  }
-
-  .stack-total-inner {
-    align-items: center;
-    text-align: center;
-    gap: 0.3rem;
-  }
-
-  .stack-total-label {
-    font-size: 0.72rem;
-    font-weight: 500;
-    line-height: 1.35;
-  }
-
-  .stack-total-value {
-    font-size: 1rem;
+  .stack-mystand {
+    font-size: 0.85rem;
   }
 
   .price-card .btn-lime {
@@ -2110,19 +2241,6 @@ main,
 @media (min-width: 760px) {
   .hero {
     padding-top: 2.6rem;
-  }
-
-  .stack-total-inner {
-    flex-direction: row;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1.5rem;
-  }
-
-  .stack-total-value {
-    flex: none;
-    white-space: nowrap;
-    font-size: 1.05rem;
   }
 
   .rail-list li {
