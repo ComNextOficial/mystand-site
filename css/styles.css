@@ -515,6 +515,60 @@ main,
   color: var(--ink-soft);
 }
 
+/* ---------- nota de instalação (acima de O que você recebe) ---------- */
+
+.ease-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  max-width: 28.5rem;
+  margin: 0 0 2.1rem;
+  padding: 0.95rem 1.05rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 1.1rem;
+  box-shadow: 0 10px 28px rgba(11, 22, 16, 0.045);
+}
+
+.ease-note-icon {
+  flex-shrink: 0;
+  width: 2.15rem;
+  height: 2.15rem;
+  display: grid;
+  place-items: center;
+  border-radius: 0.7rem;
+  background: rgba(200, 245, 66, 0.42);
+  color: var(--ink);
+}
+
+.ease-note-body {
+  min-width: 0;
+}
+
+.ease-note-copy {
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+.ease-note-copy strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.ease-note-plus {
+  display: inline-block;
+  margin-top: 0.55rem;
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.32rem 0.58rem;
+  border-radius: 999px;
+  background: var(--forest);
+  color: #eef3e8;
+}
+
 .faq-aside {
   font-size: 0.82rem;
   color: var(--muted);
@@ -1422,6 +1476,16 @@ main,
   .faq,
   .no {
     text-align: center;
+  }
+
+  .ease-note {
+    margin-inline: auto;
+    text-align: left;
+    max-width: 22.5rem;
+  }
+
+  .ease-note-copy {
+    font-size: 0.86rem;
   }
 
   .hero-copy {
