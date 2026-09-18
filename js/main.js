@@ -1,6 +1,6 @@
 (function () {
   var cfg = window.MYSTAND || {};
-  var price = cfg.PRICE_LABEL || "R$ 147";
+  var price = cfg.PRICE_LABEL || "R$ 97";
   var checkout = (cfg.CHECKOUT_URL || "").trim();
   var checkoutAlt = (cfg.CHECKOUT_ALT_URL || "").trim();
   var installments = cfg.PRICE_INSTALLMENTS || "";
@@ -64,7 +64,7 @@
     return /\/legal\//.test(location.pathname) ? "../ir-pagar.html" : "ir-pagar.html";
   }
 
-  var PRICE_MAIN = Number(cfg.PRICE) || 147;
+  var PRICE_MAIN = Number(cfg.PRICE) || 97;
   var PRICE_ALT = Number(cfg.PRICE_ALT) || 187;
   var ALLOWED_PRICES = {};
   ALLOWED_PRICES[PRICE_MAIN] = PRICE_MAIN;
