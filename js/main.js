@@ -54,57 +54,14 @@
   function pageKind() {
     var p = (location.pathname || "").toLowerCase();
     if (/contato\.html/.test(p)) return "contato";
-    if (/ir-pagar\.html/.test(p)) return "pagar";
-    if (/obrigado\.html/.test(p)) return "obrigado";
     if (/index\.html$/.test(p) || /\/$/.test(location.pathname) || location.pathname === "") return "landing";
     return "other";
   }
 
-  function pagarHref() {
-    return /\/legal\//.test(location.pathname) ? "../ir-pagar.html" : "ir-pagar.html";
-  }
-
   var PRICE_MAIN = Number(cfg.PRICE) || 97;
-  var PRICE_ALT = Number(cfg.PRICE_ALT) || 187;
-  var ALLOWED_PRICES = {};
-  ALLOWED_PRICES[PRICE_MAIN] = PRICE_MAIN;
-  ALLOWED_PRICES[PRICE_ALT] = PRICE_ALT;
-
-  function priceFromCheckoutUrl(url) {
-    var u = String(url || "");
-    var alt = (cfg.CHECKOUT_ALT_URL || "").trim();
-    if ((alt && u.indexOf(alt) !== -1) || /OI8UR6A/i.test(u)) return PRICE_ALT;
-    return PRICE_MAIN;
-  }
-
-  function rememberPrice(amount) {
-    if (!ALLOWED_PRICES[amount]) return;
-    try {
-      sessionStorage.setItem("mystand_price", String(amount));
-    } catch (e) {}
-  }
-
-  function readRememberedPrice() {
-    try {
-      var n = parseInt(sessionStorage.getItem("mystand_price") || "", 10);
-      if (ALLOWED_PRICES[n]) return n;
-    } catch (e) {}
-    return null;
-  }
-
-  function priceFromQuery() {
-    var params = new URLSearchParams(location.search);
-    var n = parseInt(params.get("valor") || params.get("value") || params.get("amount") || "", 10);
-    if (ALLOWED_PRICES[n]) return n;
-    return null;
-  }
-
-  function purchaseValue() {
-    return priceFromQuery() || readRememberedPrice() || PRICE_ALT;
-  }
 
   function offerPayload(amount) {
-    var value = ALLOWED_PRICES[amount] || PRICE_MAIN;
+    var value = Number(amount) || PRICE_MAIN;
     return {
       content_name: "My Stand codigo-fonte",
       content_ids: ["mystand-fonte"],
@@ -211,11 +168,6 @@
         el.setAttribute("rel", "noopener noreferrer");
         el.removeAttribute("target");
         el.classList.remove("is-wait");
-        el.addEventListener("click", function () {
-          var amount = priceFromCheckoutUrl(url);
-          rememberPrice(amount);
-          track("InitiateCheckout", offerPayload(amount));
-        });
       } else {
         el.setAttribute("href", "#oferta");
         el.classList.remove("is-wait");
@@ -468,23 +420,6 @@
     }
     if (kind === "contato") {
       track("Lead", { content_name: "Contato My Stand" });
-      return;
-    }
-    if (kind === "pagar") {
-      if (checkout) {
-        var payAmount = priceFromQuery() || priceFromCheckoutUrl(checkout);
-        rememberPrice(payAmount);
-        track("InitiateCheckout", offerPayload(payAmount));
-        window.setTimeout(function () {
-          location.replace(withTrackingParams(checkout));
-        }, 450);
-      } else {
-        location.replace("index.html#oferta");
-      }
-      return;
-    }
-    if (kind === "obrigado") {
-      track("Purchase", offerPayload(purchaseValue()));
     }
   }
 
